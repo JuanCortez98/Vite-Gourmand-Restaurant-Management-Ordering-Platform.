@@ -1,0 +1,9 @@
+Options -Indexes
+RewriteEngine On
+
+RewriteRule "(^|/)\." - [F,END]
+RewriteRule ^(?:Includes|database|bin)(?:/|$) - [F,END,NC]
+RewriteRule ^(?:setup\.php|README\.md|ACCUEIL\.md|CORRECTIONS\.md|INICIAR_XAMPP\.bat|composer\.(?:json|lock)|Procfile)$ - [F,END,NC]
+
+RewriteRule ^$ public/index.php [END]
+RewriteRule ^(index|api|about|menus|menus-mongo|menus-combined|warframes|mentions-legales|conditions-generales)\.php$ public/$1.php [END,NC]

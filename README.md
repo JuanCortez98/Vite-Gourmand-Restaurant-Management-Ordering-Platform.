@@ -47,6 +47,18 @@ L'application permet de passer des commandes pour un traiteur avec trois rôles 
 - Client : client@vite.fr / client123
 - Travailleur : travailleur@vite.fr / travailleur123
 
+## Déploiement sur Heroku
+
+Le projet utilise le buildpack PHP d'Heroku et conserve les routes publiques sous `public/`. Avant d'activer un dyno web, configurez une base MySQL accessible depuis Heroku avec les variables d'environnement suivantes :
+
+- `DB_HOST`
+- `DB_NAME`
+- `DB_USER`
+- `DB_PASS`
+- `DB_PORT` (facultatif si le serveur utilise le port MySQL par défaut)
+
+Ne stockez pas ces identifiants dans Git. Importez les schémas requis depuis `database/vite_gourmand.sql` et `database/warframes.sql` dans cette base. Les fonctionnalités MongoDB de démonstration nécessitent également un service MongoDB distant configuré séparément.
+
 ## Structure du projet
 
 - `admin/` -> Interface administrateur

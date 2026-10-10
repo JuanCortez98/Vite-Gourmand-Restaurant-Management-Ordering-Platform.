@@ -1,0 +1,14 @@
+{
+  "name": "juancortez/vite-gourmand",
+  "description": "Vite & Gourmand PHP application",
+  "type": "project",
+  "require": {
+    "php": "^8.2",
+    "ext-pdo": "*",
+    "ext-pdo_mysql": "*"
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "sort-packages": true
+  }
+}
