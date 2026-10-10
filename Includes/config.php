@@ -4,12 +4,15 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-define('DB_HOST', getenv('DB_HOST') ?: 'localhost');
-define('DB_NAME', getenv('DB_NAME') ?: 'vite_gourmand');
-define('DB_USER', getenv('DB_USER') ?: 'root');
-define('DB_PASS', getenv('DB_PASS') !== false ? getenv('DB_PASS') : '');
+// Heroku (JawsDB) fournit JAWSDB_URL ; sinon on utilise DB_* ou les valeurs XAMPP locales.
+$dbUrl = getenv('JAWSDB_URL') ? parse_url(getenv('JAWSDB_URL')) : null;
 
-$dbPort = getenv('DB_PORT');
+define('DB_HOST', $dbUrl['host'] ?? (getenv('DB_HOST') ?: 'localhost'));
+define('DB_NAME', isset($dbUrl['path']) ? ltrim($dbUrl['path'], '/') : (getenv('DB_NAME') ?: 'vite_gourmand'));
+define('DB_USER', $dbUrl['user'] ?? (getenv('DB_USER') ?: 'root'));
+define('DB_PASS', $dbUrl['pass'] ?? (getenv('DB_PASS') !== false ? getenv('DB_PASS') : ''));
+
+$dbPort = $dbUrl['port'] ?? getenv('DB_PORT');
 $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8mb4";
 if ($dbPort !== false && $dbPort !== '') {
     $dsn .= ";port=" . $dbPort;
