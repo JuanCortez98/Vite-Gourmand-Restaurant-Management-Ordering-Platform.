@@ -22,9 +22,6 @@ vendor/
 phpunit.xml
 phpunit.xml.dist
 
-# Ignore composer lock if the project is not using composer
-composer.lock
-
 # Ignore generated files
 *.log
 *.bak
